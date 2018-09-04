@@ -27,14 +27,6 @@ var movies = [
 ];
 
 class ChangeMovie extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			movie: this.props.movie
-		};
-		this.handleChange = this.handleChange.bind(this);
-	}
-	
 	render() {
 		return (
 			<div className="component">
