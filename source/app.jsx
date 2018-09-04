@@ -34,21 +34,18 @@ class ChangeMovie extends React.Component {
 		};
 		this.handleChange = this.handleChange.bind(this);
 	}
-	handleChange(process,e){ 
-		this.props.movie[process] = e.target.value;
-		this.setState({movie: this.props.movie});
-	}
+	
 	render() {
 		return (
 			<div className="component">
 				<div>
-					<label>Name:</label> <input type="text" value={this.props.movie.name || ''} onChange={this.handleChange.bind(this,"name")}/>
+					<label>Name:</label> <input type="text" value={this.props.movie.name || ''} onChange={this.props.changeFunction.bind(this,"name",this.props.movie.id)}/>
 				</div>
 				<div>
-					<label>Year:</label> <input type="text" value={this.props.movie.year || ''} onChange={this.handleChange.bind(this,"year")}/>
+					<label>Year:</label> <input type="text" value={this.props.movie.year || ''} onChange={this.props.changeFunction.bind(this,"year",this.props.movie.id)}/>
 				</div>
 				<div>
-					<label>Description:</label> <textarea type="text" value={this.props.movie.description || ''} onChange={this.handleChange.bind(this,"description")}></textarea>
+					<label>Description:</label> <textarea type="text" value={this.props.movie.description || ''} onChange={this.props.changeFunction.bind(this,"description",this.props.movie.id)}></textarea>
 				</div>
 			</div>
 		);
@@ -64,6 +61,7 @@ class MovieList extends React.Component {
 			selectedMovie: this.props.movieList[0]
 		};
 		this.handleClick = this.handleClick.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 	}
 	
 	handleClick(id) {
@@ -71,6 +69,13 @@ class MovieList extends React.Component {
 		this.setState({
 			movies: this.state.movies,
 			selectedMovie : this.state.movies[id]
+		});
+	}
+	
+	handleChange(process,id,e){ 
+		this.state.movies[id][process] = e.target.value;
+		this.setState({
+			movies: this.state.movies
 		});
 	}
 	
@@ -84,7 +89,7 @@ class MovieList extends React.Component {
 				</button></li> 
 			}
 			)}
-			<ChangeMovie movie={this.state.selectedMovie}/>
+			<ChangeMovie movie={this.state.selectedMovie} changeFunction={this.handleChange}/>
 		</div>
 		);
 	}
