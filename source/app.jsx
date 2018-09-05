@@ -74,6 +74,7 @@ class ChangeMovie extends React.Component {
 					<div>
 						<label>Description:</label> <textarea type="text" value={this.props.movie.description || ''} onChange={this.props.changeFunction.bind(this,"description",this.props.movie.id)}></textarea>
 					</div>
+					<button onClick={this.props.deleteMovie.bind(this,this.props.movie.id)}>Delete Movie</button>
 				</div>
 			);
 	}
@@ -92,6 +93,7 @@ class MovieList extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.newMovie = this.newMovie.bind(this);
 		this.saveMovie = this.saveMovie.bind(this);
+		this.deleteMovie = this.deleteMovie.bind(this);
 	}
 	
 	handleClick(id) {
@@ -123,15 +125,24 @@ class MovieList extends React.Component {
 		movie.id = this.state.movies.length;
 		this.state.movies.push(movie);
 		this.setState({
-			movies: this.state.movies
+			movies: this.state.movies,
+			newMovie : false
 		});
 	}
+	
+	deleteMovie(id){
+		delete this.state.movies[id];
+		this.setState({
+			movies: this.state.movies,
+			isChange : false
+		});
+	}	
 	
 	render() {
 		let changeMovie = "";
 		let newMovie = "";
 		if(this.state.isChange){
-			changeMovie = <ChangeMovie movie={this.state.selectedMovie} changeFunction={this.handleChange} changeMode={this.state.isChange}/>
+			changeMovie = <ChangeMovie movie={this.state.selectedMovie} changeFunction={this.handleChange} deleteMovie={this.deleteMovie} changeMode={this.state.isChange}/>
 		}
 		if(this.state.newMovie){
 			newMovie = <NewMovie saveMovie={this.saveMovie}/>
