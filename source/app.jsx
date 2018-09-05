@@ -44,17 +44,19 @@ class NewMovie extends React.Component {
 	
 	render() {
 			return (
-				<div className="component">
-					<div>
-						<label>Name:</label> <input type="text" onChange={this.handleChange.bind(this,"name")} />
+				<div className="container">
+					<div className="form-group">
+						<label>Name:</label> <input type="text" className="form-control" onChange={this.handleChange.bind(this,"name")} />
 					</div>
-					<div>
-						<label>Year:</label> <input type="text" onChange={this.handleChange.bind(this,"year")} />
+					<div className="form-group">
+						<label>Year:</label> <input type="text" className="form-control" onChange={this.handleChange.bind(this,"year")} />
 					</div>
-					<div>
-						<label>Description:</label> <textarea type="text" onChange={this.handleChange.bind(this,"description")}></textarea>
+					<div className="form-group">
+						<label>Description:</label> <textarea type="text" className="form-control" onChange={this.handleChange.bind(this,"description")}></textarea>
 					</div>
-					<button onClick={this.props.saveMovie.bind(this,this.state.movie)}>Save Movie</button>
+					<div className="form-group">
+						<button className="btn btn-success" onClick={this.props.saveMovie.bind(this,this.state.movie)}>Save Movie</button>
+					</div>	
 				</div>
 				
 			);
@@ -64,17 +66,19 @@ class NewMovie extends React.Component {
 class ChangeMovie extends React.Component {
 	render() {
 			return (
-				<div className="component">
-					<div>
-						<label>Name:</label> <input type="text" value={this.props.movie.name || ''} onChange={this.props.changeFunction.bind(this,"name",this.props.movie.id)}/>
+				<div className="container">
+					<div className="form-group">
+						<label>Name:</label> <input type="text" className="form-control" value={this.props.movie.name || ''} onChange={this.props.changeFunction.bind(this,"name",this.props.movie.id)}/>
 					</div>
-					<div>
-						<label>Year:</label> <input type="text" value={this.props.movie.year || ''} onChange={this.props.changeFunction.bind(this,"year",this.props.movie.id)}/>
+					<div className="form-group">
+						<label>Year:</label> <input type="text" className="form-control" value={this.props.movie.year || ''} onChange={this.props.changeFunction.bind(this,"year",this.props.movie.id)}/>
 					</div>
-					<div>
-						<label>Description:</label> <textarea type="text" value={this.props.movie.description || ''} onChange={this.props.changeFunction.bind(this,"description",this.props.movie.id)}></textarea>
+					<div className="form-group">
+						<label>Description:</label> <textarea type="text" className="form-control" value={this.props.movie.description || ''} onChange={this.props.changeFunction.bind(this,"description",this.props.movie.id)}></textarea>
 					</div>
-					<button onClick={this.props.deleteMovie.bind(this,this.props.movie.id)}>Delete Movie</button>
+					<div className="form-group">
+						<button className="btn btn-warning" onClick={this.props.deleteMovie.bind(this,this.props.movie.id)}>Delete Movie</button>
+					</div>	
 				</div>
 			);
 	}
@@ -148,15 +152,19 @@ class MovieList extends React.Component {
 			newMovie = <NewMovie saveMovie={this.saveMovie}/>
 		}
 		return (
-		<div className="component">
+		<div className="container">
+			<ul className="list-group">
 			{this.state.movies.map((roll,i) => {
 				let boundItemClick = this.handleClick.bind(this, roll.id);
-				return <li key={i}>{roll.name} ({roll.year}) <button onClick={boundItemClick}>
+				return <li className="list-group-item" key={i}>{roll.name} ({roll.year}) <button className="btn btn-default btn-xs pull-right" onClick={boundItemClick}>
 					Change {this.state.movies[roll.id].changed}
 				</button></li> 
 			}
 			)}
-			<button onClick={this.newMovie}>Add New Movie</button>
+			</ul>
+			<div className="form-group">
+				<button className="btn btn-primary" onClick={this.newMovie}>Add New Movie</button>
+			</div>	
 			{changeMovie}
 			{newMovie}
 		</div>
