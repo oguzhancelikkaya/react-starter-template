@@ -1,6 +1,9 @@
 'use strict'; 
 import React from 'react'; 
 import { render } from 'react-dom'; 
+import NewMovie from './components/NewMovie';
+import ChangeMovie from './components/ChangeMovie';
+
 
 var movies = [
 	{
@@ -25,64 +28,6 @@ var movies = [
 	year:2005
   }
 ];
-
-class NewMovie extends React.Component {
-	constructor(props) {                                       
-		super(props);
-		this.state = {
-			movie: {name:'',description:'',year:''}
-		}
-		this.handleChange = this.handleChange.bind(this);
-	}
-	
-	handleChange(process,e){
-		this.state.movie[process] = e.target.value;
-		this.setState({
-			movie: this.state.movie
-		});
-	}
-	
-	render() {
-			return (
-				<div className="container">
-					<div className="form-group">
-						<label>Name:</label> <input type="text" className="form-control" onChange={this.handleChange.bind(this,"name")} />
-					</div>
-					<div className="form-group">
-						<label>Year:</label> <input type="text" className="form-control" onChange={this.handleChange.bind(this,"year")} />
-					</div>
-					<div className="form-group">
-						<label>Description:</label> <textarea type="text" className="form-control" onChange={this.handleChange.bind(this,"description")}></textarea>
-					</div>
-					<div className="form-group">
-						<button className="btn btn-success" onClick={this.props.saveMovie.bind(this,this.state.movie)}>Save Movie</button>
-					</div>	
-				</div>
-				
-			);
-	}
-}
-
-class ChangeMovie extends React.Component {
-	render() {
-			return (
-				<div className="container">
-					<div className="form-group">
-						<label>Name:</label> <input type="text" className="form-control" value={this.props.movie.name || ''} onChange={this.props.changeFunction.bind(this,"name",this.props.movie.id)}/>
-					</div>
-					<div className="form-group">
-						<label>Year:</label> <input type="text" className="form-control" value={this.props.movie.year || ''} onChange={this.props.changeFunction.bind(this,"year",this.props.movie.id)}/>
-					</div>
-					<div className="form-group">
-						<label>Description:</label> <textarea type="text" className="form-control" value={this.props.movie.description || ''} onChange={this.props.changeFunction.bind(this,"description",this.props.movie.id)}></textarea>
-					</div>
-					<div className="form-group">
-						<button className="btn btn-warning" onClick={this.props.deleteMovie.bind(this,this.props.movie.id)}>Delete Movie</button>
-					</div>	
-				</div>
-			);
-	}
-}
 
 class MovieList extends React.Component {
 	constructor(props) {                                       
