@@ -3,6 +3,7 @@ import React from 'react';
 import { render } from 'react-dom'; 
 import NewMovie from './components/NewMovie';
 import ChangeMovie from './components/ChangeMovie';
+import Menu from './components/Menu';
 
 
 var movies = [
@@ -98,20 +99,27 @@ class MovieList extends React.Component {
 		}
 		return (
 		<div className="container">
-			<ul className="list-group">
-			{this.state.movies.map((roll,i) => {
-				let boundItemClick = this.handleClick.bind(this, roll.id);
-				return <li className="list-group-item" key={i}>{roll.name} ({roll.year}) <button className="btn btn-default btn-xs pull-right" onClick={boundItemClick}>
-					Change {this.state.movies[roll.id].changed}
-				</button></li> 
-			}
-			)}
-			</ul>
-			<div className="form-group">
-				<button className="btn btn-primary" onClick={this.newMovie}>Add New Movie</button>
-			</div>	
-			{changeMovie}
-			{newMovie}
+			<div className="navbar">
+				<Menu/>
+			</div>
+			<div className="container">
+				<div className="row">
+					<ul className="list-group">
+					{this.state.movies.map((roll,i) => {
+						let boundItemClick = this.handleClick.bind(this, roll.id);
+						return <li className="list-group-item" key={i}>{roll.name} ({roll.year}) <button className="btn btn-default btn-xs pull-right" onClick={boundItemClick}>
+							Change {this.state.movies[roll.id].changed}
+						</button></li> 
+					}
+					)}
+					</ul>
+					<div className="form-group">
+						<button className="btn btn-primary" onClick={this.newMovie}>Add New Movie</button>
+					</div>	
+					{changeMovie}
+					{newMovie}
+				</div>
+			</div>
 		</div>
 		);
 	}
