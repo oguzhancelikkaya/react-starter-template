@@ -5,7 +5,6 @@ import { Link } from 'react-router';
 import { LinkContainer } from "react-router-bootstrap";
 
 
-
 class Menu extends React.Component {
 	render() {
 			return (
@@ -19,7 +18,7 @@ class Menu extends React.Component {
 					
 					<Navbar.Collapse>
 						<Nav> 
-							<LinkContainer eventKey={1} to="/app"> 
+							<LinkContainer eventKey={1} to="/movie-list"> 
 								<Button className="btn btn-link active"> Movies </Button> 
 							</LinkContainer> 
 							<LinkContainer eventKey={2} to="/about"> 
