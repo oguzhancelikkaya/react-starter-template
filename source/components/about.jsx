@@ -1,19 +1,16 @@
-'use strict'; 
-import React from 'react'; 
+'use strict';
+import React from 'react';
 import Menu from './Menu';
 
 class About extends React.Component {
 
-	
+
 	render() {
 			return (
-				<div className="container">
-					<div className="navbar">
-						<Menu/>
-					</div>					
+				<div className="container">				
 					About Us
 				</div>
-				
+
 			);
 	}
 }
