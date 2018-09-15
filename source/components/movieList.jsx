@@ -1,13 +1,13 @@
-'use strict'; 
-import React from 'react'; 
-import { render } from 'react-dom'; 
+'use strict';
+import React from 'react';
+import { render } from 'react-dom';
 import NewMovie from './NewMovie';
 import ChangeMovie from './ChangeMovie';
 import Menu from './Menu';
 
 var movies = [
 	{
-	id:0,	
+	id:0,
   	name: 'Back to the Future',
     description: 'Wounded, captured and forced to build a weapon by his enemies, billionaire industrialist Tony Stark instead created an advanced suit of armor to save his life and escape captivity.',
 	changed:0,
@@ -21,17 +21,17 @@ var movies = [
 	year:1999
   },
   {
-	id:2,  
+	id:2,
   	name: 'Batman',
     description: 'His above average reflexes and hand-eye-coordination make him the most proficient archer ever known.',
 	changed:0,
 	year:2005
   }
-  
+
 ];
 
 class MovieList extends React.Component {
-	constructor(props) {                                       
+	constructor(props) {
 		super(props);
 		this.state = {
 			isChange: false,
@@ -45,7 +45,7 @@ class MovieList extends React.Component {
 		this.saveMovie = this.saveMovie.bind(this);
 		this.deleteMovie = this.deleteMovie.bind(this);
 	}
-	
+
 	handleClick(id) {
 		this.state.movies[id].changed += 1;
 		this.setState({
@@ -55,21 +55,21 @@ class MovieList extends React.Component {
 			newMovie : false
 		});
 	}
-	
+
 	newMovie() {
 		this.setState({
 			isChange : false,
 			newMovie : true
 		});
 	}
-	
-	handleChange(process,id,e){ 
+
+	handleChange(process,id,e){
 		this.state.movies[id][process] = e.target.value;
 		this.setState({
 			movies: this.state.movies
 		});
 	}
-	
+
 	saveMovie(movie){
 		movie.changed = 0;
 		movie.id = this.state.movies.length;
@@ -79,15 +79,15 @@ class MovieList extends React.Component {
 			newMovie : false
 		});
 	}
-	
+
 	deleteMovie(id){
 		delete this.state.movies[id];
 		this.setState({
 			movies: this.state.movies,
 			isChange : false
 		});
-	}	
-	
+	}
+
 	render() {
 		let changeMovie = "";
 		let newMovie = "";
@@ -99,9 +99,6 @@ class MovieList extends React.Component {
 		}
 		return (
 		<div className="container">
-			<div className="navbar">
-				<Menu/>
-			</div>
 			<div className="container">
 				<div className="row">
 					<ul className="list-group">
@@ -109,13 +106,13 @@ class MovieList extends React.Component {
 						let boundItemClick = this.handleClick.bind(this, roll.id);
 						return <li className="list-group-item" key={i}>{roll.name} ({roll.year}) <button className="btn btn-default btn-xs pull-right" onClick={boundItemClick}>
 							Change {this.state.movies[roll.id].changed}
-						</button></li> 
+						</button></li>
 					}
 					)}
 					</ul>
 					<div className="form-group">
 						<button className="btn btn-primary" onClick={this.newMovie}>Add New Movie</button>
-					</div>	
+					</div>
 					{changeMovie}
 					{newMovie}
 				</div>
